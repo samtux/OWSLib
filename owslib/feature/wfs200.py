@@ -24,6 +24,7 @@ from owslib.namespaces import Namespaces
 
 # other imports
 from urllib.parse import urlencode
+from urllib import unquote_plus
 
 import logging
 from owslib.util import log
@@ -288,7 +289,7 @@ class WebFeatureService_2_0_0(WebFeatureService_):
             (url, data) = self.getPOSTGetFeatureRequest()
 
         # If method is 'Post', data will be None here
-        u = openURL(url, data, method, timeout=self.timeout, auth=self.auth)
+        u = openURL(unquote_plus(url), data, method, timeout=self.timeout, auth=self.auth)
 
         # check for service exceptions, rewrap, and return
         # We're going to assume that anything with a content-length > 32k
